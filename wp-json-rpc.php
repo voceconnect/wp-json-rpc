@@ -92,7 +92,7 @@ class WP_JSON_RPC_API_Control {
 		if (empty($request->method)) {
 			return;
 		}
-		voce_error_log(__FUNCTION__ . ' - ' . time(), $request);
+
 		header('Content-Type: application/json');
 		$id = isset($request->id) ? (string) $request->id : null;
 		$this->id = $id;
