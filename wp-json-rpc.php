@@ -473,7 +473,11 @@ class WP_JSON_RPC_Server extends wp_xmlrpc_server {
 			$method_params = $this->method_params[$this->message->methodName];
 
 			foreach ($method_params as $method_param) {
-				$params[] = array_key_exists($method_param, $this->message->params) ? $this->message->params[$method_param] : null;
+				if (array_key_exists($method_param, $this->message->params)) {
+					$params[] = $this->message->params[$method_param];
+				} else {
+					$params[] = '';
+				}
 			}
 
 			$this->message->params = $params;
@@ -494,13 +498,6 @@ class WP_JSON_RPC_Message extends IXR_Message {
 
 if (!function_exists('is_associative')) {
 	function is_associative($array) {
-		if (is_array($array)) {
-			foreach ($array as $key => $value) {
-				if (is_string($key)) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return (is_array($array) && (bool)count(array_filter(array_keys($array), 'is_string')));
 	}
 }
