@@ -159,15 +159,325 @@ class WP_JSON_RPC_API_View {
 
 class WP_JSON_RPC_Server extends wp_xmlrpc_server {
 
+	var $method_params;
+
+	public function WP_JSON_RPC_Server() {
+
+		parent::__construct();
+
+		$this->method_params = array(
+			'demo.addTwoNumbers' => array(
+				'number1',
+				'number2',
+			),
+			'wp.getUsersBlogs' => array(
+				'username',
+				'password',
+			),
+			'wp.getPage' => array(
+				'blog_id',
+				'page_id',
+				'username',
+				'password',
+			),
+			'wp.getPages' => array(
+				'blog_id',
+				'username',
+				'password',
+				'num_pages',
+			),
+			'wp.newPage' => array(
+				'username',
+				'password',
+				'page',
+				'publish',
+			),
+			'wp.deletePage' => array(
+				'blog_id',
+				'username',
+				'password',
+				'page_id',
+			),
+			'wp.editPage' => array(
+				'blog_id',
+				'page_id',
+				'username',
+				'password',
+				'content',
+				'publish',
+			),
+			'wp.getPageList' => array(
+				'blog_id',
+				'username',
+				'password',
+			),
+			'wp.getAuthors' => array(
+				'blog_id',
+				'username',
+				'password',
+			),
+			'wp.getTags' => array(
+				'blog_id',
+				'username',
+				'password',
+			),
+			'wp.newCategory' => array(
+				'blog_id',
+				'username',
+				'password',
+				'category',
+			),
+			'wp.deleteCategory' => array(
+				'blog_id',
+				'username',
+				'password',
+				'category_id',
+			),
+			'wp.suggestCategories' => array(
+				'blog_id',
+				'username',
+				'password',
+				'category',
+				'max_results',
+			),
+			'wp.getComment' => array(
+				'blog_id',
+				'username',
+				'password',
+				'comment_id',
+			),
+			'wp.getComments' => array(
+				'blog_id',
+				'username',
+				'password',
+				'struct',
+			),
+			'wp.deleteComment' => array(
+				'blog_id',
+				'username',
+				'password',
+				'comment_ID',
+			),
+			'wp.editComment' => array(
+				'blog_id',
+				'username',
+				'password',
+				'comment_ID',
+				'content_struct',
+			),
+			'wp.newComment' => array(
+				'blog_id',
+				'username',
+				'password',
+				'post',
+				'content_struct',
+			),
+			'wp.getCommentStatusList' => array(
+				'blog_id',
+				'username',
+				'password',
+			),
+			'wp.getCommentCount' => array(
+				'blog_id',
+				'username',
+				'password',
+				'post_id',
+			),
+			'wp.getPostStatusList' => array(
+				'blog_id',
+				'username',
+				'password',
+			),
+			'wp.getPageStatusList' => array(
+				'blog_id',
+				'username',
+				'password',
+			),
+			'wp.getPageTemplates' => array(
+				'blog_id',
+				'username',
+				'password',
+			),
+			'wp.getOptions' => array(
+				'blog_id',
+				'username',
+				'password',
+				'options',
+			),
+			'wp.setOptions' => array(
+				'blog_id',
+				'username',
+				'password',
+				'options',
+			),
+			'wp.getMediaItem' => array(
+				'blog_id',
+				'username',
+				'password',
+				'attachment_id',
+			),
+			'wp.getMediaLibrary' => array(
+				'blog_id',
+				'username',
+				'password',
+				'struct',
+			),
+			'wp.getPostFormats' => array(
+				'blog_id',
+				'username',
+				'password',
+			),
+			'blogger.getUsersBlogs' => array(
+				'username',
+				'password',
+			),
+			'blogger.getUserInfo' => array(
+				'username',
+				'password',
+			),
+			'blogger.getPost' => array(
+				'post_ID',
+				'username',
+				'password',
+			),
+			'blogger.getRecentPosts' => array(
+				'blog_ID',
+				'username',
+				'password',
+				'query',
+			),
+			'blogger.getTemplate' => array(
+				'blog_ID',
+				'username',
+				'password',
+				'template',
+			),
+			'blogger.setTemplate' => array(
+				'blog_ID',
+				'username',
+				'password',
+				'content',
+				'template',
+			),
+			'blogger.newPost' => array(
+				'blog_ID',
+				'username',
+				'password',
+				'content',
+				'publish',
+			),
+			'blogger.editPost' => array(
+				'post_ID',
+				'username',
+				'password',
+				'content',
+				'publish',
+			),
+			'blogger.deletePost' => array(
+				'post_ID',
+				'username',
+				'password',
+				'publish',
+			),
+			'metaWeblog.newPost' => array(
+				'blog_ID',
+				'username',
+				'password',
+				'content_struct',
+				'publish',
+			),
+			'metaWeblog.editPost' => array(
+				'post_ID',
+				'username',
+				'password',
+				'content_struct',
+				'publish',
+			),
+			'metaWeblog.getPost' => array(
+				'post_ID',
+				'username',
+				'password',
+			),
+			'metaWeblog.getRecentPosts' => array(
+				'blog_ID',
+				'username',
+				'password',
+				'query',
+			),
+			'wp.getCategories' => array(
+				'blog_ID',
+				'username',
+				'password',
+			),
+			'wp.uploadFile' => array(
+				'blog_ID',
+				'username',
+				'password',
+				'data',
+			),
+			'mt.getRecentPostTitles' => array(
+				'blog_ID',
+				'username',
+				'password',
+				'query',
+			),
+			'mt.getCategoryList' => array(
+				'blog_ID',
+				'username',
+				'password',
+			),
+			'mt.getPostCategories' => array(
+				'post_ID',
+				'username',
+				'password',
+			),
+			'mt.setPostCategories' => array(
+				'post_ID',
+				'username',
+				'password',
+				'categories',
+			),
+			'mt.publishPost' => array(
+				'post_ID',
+				'username',
+				'password',
+			),
+			'pingback.ping' => array(
+				'pagelinkedfrom',
+				'pagelinkedto',
+			),
+		);
+
+		$this->method_params = apply_filters('jsonrpc_method_params', $this->method_params);
+
+	}
+
 	public function serve_request($data = null) {
 		$this->setCapabilities();
 		$this->callbacks = apply_filters('jsonrpc_methods', $this->methods);
 		$this->setCallbacks();
 		$this->message = new WP_JSON_RPC_Message($data);
 		$this->message->parse();
+		$this->match_named_json_params();
 		$result = $this->call($this->message->methodName, $this->message->params);
 
 		return $result;
+	}
+
+	public function match_named_json_params() {
+		$params_associative = is_associative($this->message->params);
+		$param_mapping_present = array_key_exists($this->message->methodName, $this->method_params);
+
+		if ($params_associative && $param_mapping_present) {
+			$params = array();
+			$method_params = $this->method_params[$this->message->methodName];
+
+			foreach ($method_params as $method_param) {
+				$params[] = array_key_exists($method_param, $this->message->params) ? $this->message->params[$method_param] : null;
+			}
+
+			$this->message->params = $params;
+		}
 	}
 
 }
@@ -180,4 +490,17 @@ class WP_JSON_RPC_Message extends IXR_Message {
 		$this->params = is_array($this->message->params) ? $this->message->params : array($this->message->params);
 	}
 
+}
+
+if (!function_exists('is_associative')) {
+	function is_associative($array) {
+		if (is_array($array)) {
+			foreach ($array as $key => $value) {
+				if (is_string($key)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
