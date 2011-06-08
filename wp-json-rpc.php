@@ -159,6 +159,7 @@ class WP_JSON_RPC_API_View {
 
 class WP_JSON_RPC_Server extends wp_xmlrpc_server {
 
+	const UNUSED_PARAM = 'unused';
 	var $method_params;
 
 	public function WP_JSON_RPC_Server() {
@@ -328,31 +329,37 @@ class WP_JSON_RPC_Server extends wp_xmlrpc_server {
 				'password',
 			),
 			'blogger.getUsersBlogs' => array(
+				self::UNUSED_PARAM,
 				'username',
 				'password',
 			),
 			'blogger.getUserInfo' => array(
+				self::UNUSED_PARAM,
 				'username',
 				'password',
 			),
 			'blogger.getPost' => array(
+				self::UNUSED_PARAM,
 				'post_ID',
 				'username',
 				'password',
 			),
 			'blogger.getRecentPosts' => array(
+				self::UNUSED_PARAM,
 				'blog_ID',
 				'username',
 				'password',
 				'query',
 			),
 			'blogger.getTemplate' => array(
+				self::UNUSED_PARAM,
 				'blog_ID',
 				'username',
 				'password',
 				'template',
 			),
 			'blogger.setTemplate' => array(
+				self::UNUSED_PARAM,
 				'blog_ID',
 				'username',
 				'password',
@@ -360,6 +367,7 @@ class WP_JSON_RPC_Server extends wp_xmlrpc_server {
 				'template',
 			),
 			'blogger.newPost' => array(
+				self::UNUSED_PARAM,
 				'blog_ID',
 				'username',
 				'password',
@@ -367,6 +375,7 @@ class WP_JSON_RPC_Server extends wp_xmlrpc_server {
 				'publish',
 			),
 			'blogger.editPost' => array(
+				self::UNUSED_PARAM,
 				'post_ID',
 				'username',
 				'password',
@@ -374,6 +383,7 @@ class WP_JSON_RPC_Server extends wp_xmlrpc_server {
 				'publish',
 			),
 			'blogger.deletePost' => array(
+				self::UNUSED_PARAM,
 				'post_ID',
 				'username',
 				'password',
